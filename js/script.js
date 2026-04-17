@@ -33,6 +33,10 @@ const translations = {
         skill_3_desc: "Marques mémorables",
         skill_4_title: "Intégration Web",
         skill_4_desc: "HTML / CSS / JS",
+        skill_5_title: "Motion Design",
+        skill_5_desc: "Animation & Vidéo",
+        skill_6_title: "Print Designer",
+        skill_6_desc: "Supports Imprimés",
         edu_subtitle: "Mon Parcours",
         edu_title: "Ma <span class='text-gradient'>Formation</span>",
         edu_desc: "Aperçu de mon parcours académique et de mes apprentissages.",
@@ -52,6 +56,10 @@ const translations = {
         portf_2_title: "Maquette Responsive",
         portf_3_tag: "Print & Communication",
         portf_3_title: "Supports Marketing",
+        portf_4_tag: "Animation & Vidéo",
+        portf_4_title: "Motion Graphic",
+        portf_5_tag: "Print Design",
+        portf_5_title: "Création Print",
         contact_subtitle: "Me Contacter",
         contact_title: "Travaillons <span class='text-gradient'>Ensemble</span>",
         contact_desc: "N'hésitez pas à me laisser un message pour un projet, une opportunité ou simplement pour dire bonjour !",
@@ -95,6 +103,10 @@ const translations = {
         skill_3_desc: "Memorable brands",
         skill_4_title: "Web Development",
         skill_4_desc: "HTML / CSS / JS",
+        skill_5_title: "Motion Graphic Designer",
+        skill_5_desc: "Animation & Video",
+        skill_6_title: "Print Designer",
+        skill_6_desc: "Print Materials",
         edu_subtitle: "My Background",
         edu_title: "My <span class='text-gradient'>Education</span>",
         edu_desc: "Overview of my academic journey and learning path.",
@@ -114,6 +126,10 @@ const translations = {
         portf_2_title: "Responsive Mockup",
         portf_3_tag: "Print & Communication",
         portf_3_title: "Marketing Assets",
+        portf_4_tag: "Animation & Video",
+        portf_4_title: "Motion Graphic",
+        portf_5_tag: "Print Design",
+        portf_5_title: "Print Creation",
         contact_subtitle: "Contact Me",
         contact_title: "Let's Work <span class='text-gradient'>Together</span>",
         contact_desc: "Feel free to leave me a message for a project, an opportunity, or just to say hi!",
@@ -288,11 +304,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const titleFr = button.getAttribute('data-title-fr');
             const titleEn = button.getAttribute('data-title-en');
             const iconClass = button.getAttribute('data-icon');
-            const imgSrc = button.getAttribute('data-image');
+            const imgStr = button.getAttribute('data-images');
 
             const modalTitle = bioModal.querySelector('.modal-title');
             const modalIcon = bioModal.querySelector('#modalIcon');
-            const modalImage = bioModal.querySelector('#modalImage');
+            const modalCarousel = bioModal.querySelector('#modalCarousel');
+            const modalCarouselInner = bioModal.querySelector('#modalCarouselInner');
 
             if (currentLang === 'fr' && titleFr) modalTitle.textContent = titleFr;
             else if (currentLang === 'en' && titleEn) modalTitle.textContent = titleEn;
@@ -302,11 +319,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalIcon.classList.add(iconClass);
             }
 
-            if (imgSrc && modalImage) {
-                modalImage.src = imgSrc;
-                modalImage.style.display = 'block';
-            } else if (modalImage) {
-                modalImage.style.display = 'none';
+            if (imgStr && modalCarouselInner) {
+                const images = imgStr.split(',');
+                modalCarouselInner.innerHTML = '';
+                images.forEach((src, index) => {
+                    const activeClass = index === 0 ? 'active' : '';
+                    modalCarouselInner.innerHTML += `<div class="carousel-item ${activeClass} h-100">
+                        <img src="${src.trim()}" class="d-block w-100 h-100" style="object-fit:cover;" alt="Preview">
+                    </div>`;
+                });
+                modalCarousel.style.display = 'block';
+            } else if (modalCarousel) {
+                modalCarousel.style.display = 'none';
             }
         });
     }
