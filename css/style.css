@@ -17,6 +17,12 @@
     --glass-border: rgba(0, 210, 255, 0.15);
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     color: var(--text-main);
@@ -317,7 +323,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 
 .timeline-dot {
     position: absolute;
-    left: -2.85rem;
+    left: -13px; /* Centers the 24px dot on the 3px border */
     top: 1.5rem;
     width: 24px;
     height: 24px;
